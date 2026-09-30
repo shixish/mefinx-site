@@ -41,7 +41,9 @@ and pull request, and on `main` it runs `wrangler deploy`. Nothing is published 
 machine.
 
 CI authenticates with two repository secrets (Settings → Secrets and variables → Actions). This
-repo is public, so they must never be written into a file or printed in a workflow step.
+repo is public, so they must never be written into a file or printed in a workflow step. The
+deploy step also filters email addresses out of wrangler's output, since its error messages name
+the account by the owner's email.
 
 | Secret                  | Value                                                                              |
 | ----------------------- | ---------------------------------------------------------------------------------- |
