@@ -4,6 +4,14 @@
 	"main": "./src/worker.ts",
 	"compatibility_date": "2026-02-24",
 	"compatibility_flags": ["nodejs_compat"],
+	// Served only on mefinx.com (www redirects there, see src/worker.ts). The workers.dev and
+	// preview URLs are off so the admin can't be reached on a host its passkey doesn't match.
+	"routes": [
+		{ "pattern": "mefinx.com", "custom_domain": true },
+		{ "pattern": "www.mefinx.com", "custom_domain": true },
+	],
+	"workers_dev": false,
+	"preview_urls": false,
 	"d1_databases": [
 		{
 			"binding": "DB",

@@ -50,6 +50,9 @@ export default defineConfig({
 			},
 		}),
 		emdash({
+			// The public origin. Setup refuses to run in production without it, and the admin
+			// passkey is bound to this domain.
+			siteUrl: "https://mefinx.com",
 			database: d1({ binding: "DB", session: "auto" }),
 			storage: r2({ binding: "MEDIA" }),
 		}),

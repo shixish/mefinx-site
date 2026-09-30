@@ -53,25 +53,19 @@ the account by the owner's email.
 The Worker is about 4.2 MB gzipped, above the Workers free plan's 3 MB limit, so the account needs
 Workers Paid. R2 has to be enabled on the account once, in the dashboard.
 
+The site is served only on **mefinx.com**. `wrangler.jsonc` attaches mefinx.com and www.mefinx.com
+as custom domains, with workers.dev and preview URLs turned off, and `src/worker.ts` redirects www
+to the bare domain. `siteUrl` in `astro.config.mjs` is the same origin: EmDash refuses production
+setup without it, and the admin passkey is bound to it. The deploy token therefore also needs
+**Zone → Workers Routes: Edit** on the mefinx.com zone.
+
 The one-time steps after the first green deploy:
 
-1. The first deploy creates the `mefinx-site` D1 database, a KV namespace for sessions and (in its
-   own workflow step, since wrangler doesn't provision R2) the `mefinx-site-media` R2 bucket, and serves the site on a `workers.dev` URL.
+1. Visit https://mefinx.com/_emdash/admin and complete setup. That creates the admin account
+   (passkey) and applies the seed. Do it straight away: until setup is done, whoever reaches the
+   admin first can claim it.
 2. Set the encryption key EmDash uses for plugin settings:
    `pnpm wrangler secret put EMDASH_ENCRYPTION_KEY` (generate one with `npx emdash secrets`).
    Worker secrets survive later deploys.
-3. Visit `/_emdash/admin` on the deployed URL and complete setup. That creates the admin account
-   (passkey) and applies the seed. Do this straight after the first deploy: until setup is done,
-   whoever reaches the admin first can claim it.
-4. Once it works on `workers.dev`, add the domain to `wrangler.jsonc` and push:
-
-   ```jsonc
-   "routes": [
-     { "pattern": "mefinx.com", "custom_domain": true },
-     { "pattern": "www.mefinx.com", "custom_domain": true }
-   ]
-   ```
-
-   This needs mefinx.com to be a zone on the same Cloudflare account.
 
 See [Deploy to Cloudflare](https://docs.emdashcms.com/deployment/cloudflare/) for the full guide.
