@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" width="512" height="512" role="img" aria-label="mefinx">
+  <title>mefinx</title>
+  <!--
+    The mefinx mark, as vector.
+
+    A recreation of public/logo512.png, which is a raster and the only form the mark ever existed in.
+    Every number below was measured rather than judged: the PNG was decoded, each strand's centreline
+    walked onto the ridge of the tube it belongs to, each cap found by walking out along the tangent
+    to where the tube's own brightness halves, each colour stop read as the brightness-weighted mean
+    across the tube at that point, and the whole thing fitted to the fewest cubic curves that stay
+    within an eighth of a stroke width of that centreline. Thirteen shapes and thirty-odd curves.
+
+    Three figures — two with ring heads, the third the open crook the artwork actually draws — whose
+    bodies cross into the knot the mark is about. The crook is one unbroken stroke: its loop's left
+    side stops dead in a cap, and the long tail is the continuation of the loop's right side.
+
+    The neon is four passes over one set of strokes: a broad wash, a tighter glow, the tube itself,
+    then the tube eroded to a thread and whitened for the lit core down its middle.
+
+    No background. The strands are lit colours meant for a dark surface, so whatever shows this needs
+    to bring its own — a CSS background on the <img>, or a rect added back here. Leaving it out is
+    what makes the file reusable: a plate baked in cannot be taken off again.
+
+    src/components/brand-mark.tsx is this same drawing inline, and the two are kept in step by
+    brand-mark.test.ts.
+  -->
+  <defs>
+    <linearGradient id="mefinx-coil" gradientUnits="userSpaceOnUse" x1="32" y1="46" x2="20" y2="42">
+      <stop offset="0" stop-color="#5e9ec5" />
+      <stop offset="0.82" stop-color="#52add1" />
+      <stop offset="0.87" stop-color="#61ccdb" />
+      <stop offset="0.94" stop-color="#50aacf" />
+      <stop offset="1" stop-color="#5dc5d6" />
+    </linearGradient>
+    <linearGradient id="mefinx-fall" gradientUnits="userSpaceOnUse" x1="25.6" y1="39.9" x2="65.5" y2="82.5">
+      <stop offset="0" stop-color="#60cad7" />
+      <stop offset="0.53" stop-color="#54aece" />
+      <stop offset="0.56" stop-color="#4d9fc5" />
+      <stop offset="0.72" stop-color="#4692bf" />
+      <stop offset="1" stop-color="#4ba1c7" />
+    </linearGradient>
+    <linearGradient id="mefinx-rise" gradientUnits="userSpaceOnUse" x1="65.5" y1="82.5" x2="63.9" y2="48.6">
+      <stop offset="0" stop-color="#58b8d1" />
+      <stop offset="0.42" stop-color="#54afb9" />
+      <stop offset="0.53" stop-color="#5dbec0" />
+      <stop offset="0.6" stop-color="#5ab7b1" />
+      <stop offset="1" stop-color="#5fbab0" />
+    </linearGradient>
+    <linearGradient id="mefinx-crookA" gradientUnits="userSpaceOnUse" x1="41.4" y1="26.1" x2="47" y2="14.8">
+      <stop offset="0" stop-color="#63a1c1" />
+      <stop offset="0.5" stop-color="#9383b4" />
+      <stop offset="0.7" stop-color="#bd73ac" />
+      <stop offset="1" stop-color="#ca5891" />
+    </linearGradient>
+    <linearGradient id="mefinx-crookB" gradientUnits="userSpaceOnUse" x1="47" y1="14.8" x2="36.6" y2="37.9">
+      <stop offset="0" stop-color="#d34e84" />
+      <stop offset="0.47" stop-color="#c65991" />
+      <stop offset="0.65" stop-color="#b0508c" />
+      <stop offset="0.71" stop-color="#b85e9b" />
+      <stop offset="1" stop-color="#ba64a1" />
+    </linearGradient>
+    <linearGradient id="mefinx-arch" gradientUnits="userSpaceOnUse" x1="43.2" y1="45.8" x2="67.4" y2="68.4">
+      <stop offset="0" stop-color="#d04c8a" />
+      <stop offset="0.74" stop-color="#d46272" />
+      <stop offset="0.81" stop-color="#cd5964" />
+      <stop offset="1" stop-color="#c8606a" />
+    </linearGradient>
+    <linearGradient id="mefinx-bowl" gradientUnits="userSpaceOnUse" x1="21" y1="74" x2="44" y2="66">
+      <stop offset="0" stop-color="#d45482" />
+      <stop offset="0.22" stop-color="#d35592" />
+      <stop offset="0.35" stop-color="#d8678a" />
+      <stop offset="0.82" stop-color="#d36f66" />
+      <stop offset="1" stop-color="#d98868" />
+    </linearGradient>
+    <linearGradient id="mefinx-swoop" gradientUnits="userSpaceOnUse" x1="37.1" y1="55.8" x2="28" y2="69.6">
+      <stop offset="0" stop-color="#c2547a" />
+      <stop offset="0.23" stop-color="#b35b85" />
+      <stop offset="0.52" stop-color="#8c82b2" />
+      <stop offset="0.64" stop-color="#6b80ba" />
+      <stop offset="1" stop-color="#51a3cd" />
+    </linearGradient>
+    <linearGradient id="mefinx-amber" gradientUnits="userSpaceOnUse" x1="68" y1="40.1" x2="77.4" y2="65.4">
+      <stop offset="0" stop-color="#ebc550" />
+      <stop offset="0.17" stop-color="#e6b847" />
+      <stop offset="0.31" stop-color="#ecbc4c" />
+      <stop offset="0.89" stop-color="#e49b4b" />
+      <stop offset="1" stop-color="#de975a" />
+    </linearGradient>
+    <filter id="mefinx-wash" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="8" />
+    </filter>
+    <filter id="mefinx-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" />
+    </filter>
+    <filter id="mefinx-core" x="-8%" y="-8%" width="116%" height="116%">
+      <feMorphology operator="erode" radius="1.45" />
+      <feColorMatrix values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0" />
+      <feGaussianBlur stdDeviation="0.55" />
+    </filter>
+    <g id="mefinx-strands" fill="none" stroke-width="4" stroke-linecap="round">
+      <circle cx="24.75" cy="28.3" r="5.78" stroke="#5ec6d3" />
+      <circle cx="70.1" cy="28.3" r="5.78" stroke="#eac24f" />
+      <path
+        d="M30.77 48.22C30.65 48.4 29.98 53.44 26.54 56.86C22.42 60.96 14.92 59.34 12.94 53.92C10.39 46.96 19.02 39.06 25.61 39.9"
+        stroke="url(#mefinx-coil)"
+      />
+      <path
+        d="M25.61 39.9C28.2 40.35 30.42 40.82 32.64 42.36C36.61 45.12 49.98 64.67 53.72 69.89C56.31 73.52 60.7 81.96 65.5 82.46"
+        stroke="url(#mefinx-fall)"
+      />
+      <path
+        d="M65.5 82.46C70.92 82.69 72.69 77.7 72.89 73.15C73.33 63.12 68.56 59.46 65.06 52.2C64.62 51.3 63.98 50.33 63.7 49.37C63.61 49.07 63.98 48.89 63.86 48.61"
+        stroke="url(#mefinx-rise)"
+      />
+      <path
+        d="M41.37 26.06C41.26 24.94 40.56 23.94 40.46 22.79C40.13 18.95 42.86 14.74 47 14.78"
+        stroke="url(#mefinx-crookA)"
+      />
+      <path
+        d="M47 14.78C53.34 15.34 56.28 22.05 52.36 27.21C48.4 32.42 40.64 30.76 36.59 37.89"
+        stroke="url(#mefinx-crookB)"
+      />
+      <path
+        d="M43.17 45.81C43.25 45.4 43 45.12 43.2 44.73C44.8 41.66 50.78 43.82 52.39 45.77C56.22 50.42 56.02 57.52 59.03 62.63C60.93 65.83 64.2 67 67.36 68.4"
+        stroke="url(#mefinx-arch)"
+      />
+      <path
+        d="M24.69 63.74C20.34 67.57 20.47 82.4 28.41 82.49C29.77 82.51 31.31 82.13 32.41 81.28C34.1 79.97 42.68 68.43 43.62 66.39C43.79 66.01 43.51 65.69 43.68 65.3"
+        stroke="url(#mefinx-bowl)"
+      />
+      <path
+        d="M37.15 55.84C38.51 61.62 33.72 66.6 28.76 68.66C28.26 68.87 28.42 69.49 27.98 69.61"
+        stroke="url(#mefinx-swoop)"
+      />
+      <path
+        d="M52.89 33.76C55.29 32.26 58.74 36.22 58.13 38.46"
+        stroke="#53adcb"
+      />
+      <path
+        d="M58.75 46.96C58.68 41.49 70.85 37.73 76.42 41.55C82.36 45.62 83.62 53.77 80.77 60.09C79.89 62.05 78.29 63.47 77.44 65.36"
+        stroke="url(#mefinx-amber)"
+      />
+      <path d="M50.4 52.7L52.7 56.4L50.3 59.4L47.7 55.6Z" fill="#eac24f" stroke="none" />
+    </g>
+  </defs>
+  <use href="#mefinx-strands" filter="url(#mefinx-wash)" opacity="0.4" />
+  <use href="#mefinx-strands" filter="url(#mefinx-glow)" opacity="0.45" />
+  <use href="#mefinx-strands" />
+  <use href="#mefinx-strands" filter="url(#mefinx-core)" opacity="0.26" />
+</svg>

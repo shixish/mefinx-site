@@ -1,0 +1,76 @@
+/*
+  theme.css -- your theme overrides. This is the file to edit to
+  retheme the site.
+
+  Every design token lives in src/styles/tokens.css (colors, gradients,
+  type scale, spacing, layout, shadows) with its default value. Override
+  any of them here: declarations in this file are unlayered, so they
+  always beat the @layer base defaults in tokens.css.
+
+  Colors are defined with light-dark(). Overriding with a plain color
+  changes light and dark mode at once; use light-dark(<light>, <dark>)
+  to set different values per mode.
+
+  Rebranding usually only needs --color-brand-* and --color-accent-* --
+  the gradient tokens follow automatically. For a flat, gradient-free
+  brand, set the --gradient-* tokens to solid colors.
+
+  Webfonts are loaded in astro.config.mjs (--font-body). Swap the loaded
+  font there; use overrides here for system fonts or a separate heading
+  face.
+
+  Example:
+
+  :root {
+    --color-brand: light-dark(#0d9488, #2dd4bf);
+    --color-accent: #f59e0b;
+    --font-weight-display: 700;
+  }
+*/
+
+:root {
+}
+
+/*
+  mefinx brand. The three brand colours are the logo's strands (cyan,
+  magenta, amber), matching --color-brand-* in the app's styles.css. The
+  dark palette mirrors the app's near-black chrome (#0a0a0a).
+*/
+:root {
+	--color-bg: light-dark(#ffffff, #0a0a0a);
+	--color-text: light-dark(#0a0a0a, #f5f5f5);
+	--color-muted: light-dark(#525252, #a3a3a3);
+	--color-border: light-dark(#e5e5e5, #262626);
+	--color-surface: light-dark(#fafafa, #141414);
+	--color-brand: light-dark(#1b8fb8, #59bfe0);
+	--color-brand-strong: light-dark(#157599, #3fa9cc);
+	--color-brand-soft: light-dark(#59bfe0, #8fd4ea);
+	--color-accent: #df4c95;
+	--color-accent-soft: #eb86b8;
+	--color-amber: #fad34a;
+
+	/* Graph entity colours, as the app draws them. */
+	--color-person: #3b82f6;
+	--color-place: #f59e0b;
+	--color-event: #10b981;
+
+	--gradient-headline: linear-gradient(
+		120deg,
+		var(--color-text) 30%,
+		var(--color-brand) 70%,
+		var(--color-accent)
+	);
+}
+
+@supports not (color: light-dark(#000, #fff)) {
+	:root {
+		--color-bg: #ffffff;
+		--color-text: #0a0a0a;
+		--color-muted: #525252;
+		--color-border: #e5e5e5;
+		--color-surface: #fafafa;
+		--color-brand: #1b8fb8;
+		--color-brand-strong: #157599;
+		--color-brand-soft: #59bfe0;
+	}
+}

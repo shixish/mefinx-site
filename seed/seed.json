@@ -1,0 +1,548 @@
+{
+	"$schema": "https://emdashcms.com/seed.schema.json",
+	"version": "1",
+	"meta": {
+		"name": "mefinx",
+		"description": "The marketing site for mefinx, the personal CRM you talk to",
+		"author": "mefinx"
+	},
+	"settings": {
+		"title": "mefinx",
+		"tagline": "The personal CRM you talk to"
+	},
+	"blockTypes": [
+		{
+			"slug": "marketing_hero",
+			"label": "Hero",
+			"description": "A prominent page introduction with optional calls to action and media",
+			"category": "Marketing",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "anchor_id",
+							"label": "Anchor ID",
+							"type": "string",
+							"validation": {
+								"pattern": "^(?:$|[a-z][a-z0-9_-]*)$"
+							}
+						},
+						{
+							"slug": "headline",
+							"label": "Headline",
+							"type": "string",
+							"required": true
+						},
+						{
+							"slug": "subheadline",
+							"label": "Subheadline",
+							"type": "text"
+						},
+						{
+							"slug": "primary_cta_label",
+							"label": "Primary CTA label",
+							"type": "string"
+						},
+						{
+							"slug": "primary_cta_url",
+							"label": "Primary CTA URL",
+							"type": "string",
+							"validation": {
+								"pattern": "^(?:$|(?:https?://|mailto:|tel:|/(?!/)|#).+)$"
+							}
+						},
+						{
+							"slug": "secondary_cta_label",
+							"label": "Secondary CTA label",
+							"type": "string"
+						},
+						{
+							"slug": "secondary_cta_url",
+							"label": "Secondary CTA URL",
+							"type": "string",
+							"validation": {
+								"pattern": "^(?:$|(?:https?://|mailto:|tel:|/(?!/)|#).+)$"
+							}
+						},
+						{
+							"slug": "image",
+							"label": "Image",
+							"type": "image"
+						},
+						{
+							"slug": "centered",
+							"label": "Center the layout",
+							"type": "boolean",
+							"defaultValue": false
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "marketing_conversation",
+			"label": "Conversation",
+			"description": "A short chat exchange that shows how talking to mefinx works",
+			"category": "Marketing",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "anchor_id",
+							"label": "Anchor ID",
+							"type": "string",
+							"validation": {
+								"pattern": "^(?:$|[a-z][a-z0-9_-]*)$"
+							}
+						},
+						{
+							"slug": "headline",
+							"label": "Headline",
+							"type": "string",
+							"required": true
+						},
+						{
+							"slug": "subheadline",
+							"label": "Subheadline",
+							"type": "text"
+						},
+						{
+							"slug": "messages",
+							"label": "Messages",
+							"type": "repeater",
+							"required": true,
+							"validation": {
+								"minItems": 1,
+								"maxItems": 12,
+								"subFields": [
+									{
+										"slug": "speaker",
+										"label": "Speaker",
+										"type": "select",
+										"required": true,
+										"options": [
+											"you",
+											"mefinx"
+										]
+									},
+									{
+										"slug": "text",
+										"label": "Message",
+										"type": "text",
+										"required": true
+									}
+								]
+							}
+						},
+						{
+							"slug": "caption",
+							"label": "Caption",
+							"type": "text"
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "marketing_features",
+			"label": "Features",
+			"description": "A grid of product or service features",
+			"category": "Marketing",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "anchor_id",
+							"label": "Anchor ID",
+							"type": "string",
+							"validation": {
+								"pattern": "^(?:$|[a-z][a-z0-9_-]*)$"
+							}
+						},
+						{
+							"slug": "headline",
+							"label": "Headline",
+							"type": "string",
+							"required": true
+						},
+						{
+							"slug": "subheadline",
+							"label": "Subheadline",
+							"type": "text"
+						},
+						{
+							"slug": "features",
+							"label": "Features",
+							"type": "repeater",
+							"required": true,
+							"validation": {
+								"minItems": 1,
+								"maxItems": 12,
+								"subFields": [
+									{
+										"slug": "icon",
+										"label": "Icon",
+										"type": "select",
+										"required": true,
+										"options": [
+											"chat",
+											"graph",
+											"filter",
+											"search",
+											"pin",
+											"calendar",
+											"offline",
+											"undo",
+											"lock",
+											"sparkle",
+											"phone",
+											"contacts",
+											"users",
+											"heart",
+											"clock",
+											"star"
+										]
+									},
+									{
+										"slug": "title",
+										"label": "Title",
+										"type": "string",
+										"required": true
+									},
+									{
+										"slug": "description",
+										"label": "Description",
+										"type": "text",
+										"required": true
+									}
+								]
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "marketing_faq",
+			"label": "FAQ",
+			"description": "A list of frequently asked questions",
+			"category": "Marketing",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "anchor_id",
+							"label": "Anchor ID",
+							"type": "string",
+							"validation": {
+								"pattern": "^(?:$|[a-z][a-z0-9_-]*)$"
+							}
+						},
+						{
+							"slug": "headline",
+							"label": "Headline",
+							"type": "string"
+						},
+						{
+							"slug": "items",
+							"label": "Questions",
+							"type": "repeater",
+							"required": true,
+							"validation": {
+								"minItems": 1,
+								"maxItems": 12,
+								"subFields": [
+									{
+										"slug": "question",
+										"label": "Question",
+										"type": "string",
+										"required": true
+									},
+									{
+										"slug": "answer",
+										"label": "Answer",
+										"type": "text",
+										"required": true
+									}
+								]
+							}
+						}
+					]
+				}
+			]
+		}
+	],
+	"collections": [
+		{
+			"slug": "pages",
+			"label": "Pages",
+			"labelSingular": "Page",
+			"supports": [
+				"drafts",
+				"revisions",
+				"seo"
+			],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true
+				},
+				{
+					"slug": "content",
+					"label": "Content",
+					"type": "blocks",
+					"validation": {
+						"allowedTypes": [
+							"marketing_hero",
+							"marketing_conversation",
+							"marketing_features",
+							"marketing_faq"
+						],
+						"maxItems": 20
+					}
+				}
+			]
+		}
+	],
+	"menus": [
+		{
+			"name": "primary",
+			"label": "Primary Navigation",
+			"items": [
+				{
+					"type": "custom",
+					"label": "How it works",
+					"url": "/#how"
+				},
+				{
+					"type": "custom",
+					"label": "Features",
+					"url": "/#features"
+				},
+				{
+					"type": "custom",
+					"label": "FAQ",
+					"url": "/#faq"
+				}
+			]
+		},
+		{
+			"name": "footer_product",
+			"label": "Footer: Product",
+			"items": [
+				{
+					"type": "custom",
+					"label": "How it works",
+					"url": "/#how"
+				},
+				{
+					"type": "custom",
+					"label": "Features",
+					"url": "/#features"
+				},
+				{
+					"type": "custom",
+					"label": "FAQ",
+					"url": "/#faq"
+				},
+				{
+					"type": "custom",
+					"label": "Open mefinx",
+					"url": "https://mefinx.app"
+				}
+			]
+		},
+		{
+			"name": "footer_company",
+			"label": "Footer: Legal",
+			"items": [
+				{
+					"type": "custom",
+					"label": "Privacy",
+					"url": "https://mefinx.app/privacy"
+				},
+				{
+					"type": "custom",
+					"label": "Terms",
+					"url": "https://mefinx.app/terms"
+				}
+			]
+		},
+		{
+			"name": "footer_support",
+			"label": "Footer: More",
+			"items": [
+				{
+					"type": "custom",
+					"label": "Built with EmDash",
+					"url": "https://emdashcms.com"
+				}
+			]
+		}
+	],
+	"content": {
+		"pages": [
+			{
+				"id": "home",
+				"slug": "home",
+				"status": "published",
+				"data": {
+					"title": "Home",
+					"content": [
+						{
+							"_type": "marketing_hero",
+							"_version": 1,
+							"_key": "hero",
+							"headline": "Remember everyone you meet.",
+							"subheadline": "mefinx is a personal CRM you talk to. Tell it about the people you meet, the places you go and what you did together, and it builds a living map of everyone you know that you can ask anything.",
+							"primary_cta_label": "Open mefinx",
+							"primary_cta_url": "https://mefinx.app",
+							"secondary_cta_label": "See how it works",
+							"secondary_cta_url": "#how"
+						},
+						{
+							"_type": "marketing_conversation",
+							"_version": 1,
+							"_key": "how",
+							"anchor_id": "how",
+							"headline": "Just tell it what happened",
+							"subheadline": "No forms and no fields. Talk to mefinx the way you'd tell a friend, and it files every detail in the right place.",
+							"messages": [
+								{
+									"speaker": "you",
+									"text": "Met Jordan at the Kava Bar tonight. Green mohawk, works with Maya at Kalani, really into bouldering."
+								},
+								{
+									"speaker": "mefinx",
+									"text": "Added Jordan with a note about the mohawk and the bouldering, linked them to Maya as coworkers at Kalani, and logged tonight at the Kava Bar."
+								},
+								{
+									"speaker": "you",
+									"text": "Who was that person from Kalani with the green hair?"
+								},
+								{
+									"speaker": "mefinx",
+									"text": "That's Jordan. You met them last night at the Kava Bar, and they work with Maya."
+								}
+							],
+							"caption": "The same conversation works for events, places, birthdays and who introduced you to whom."
+						},
+						{
+							"_type": "marketing_features",
+							"_version": 1,
+							"_key": "features",
+							"anchor_id": "features",
+							"headline": "Your people, places and moments in one graph",
+							"subheadline": "Everything you tell mefinx becomes part of a graph you can explore, filter and question.",
+							"features": [
+								{
+									"icon": "graph",
+									"title": "See how everyone connects",
+									"description": "An interactive graph of people, places and events, with every relationship drawn in: family, partners, friends, housemates and coworkers."
+								},
+								{
+									"icon": "search",
+									"title": "Find people from fuzzy memories",
+									"description": "Ask for \"the climber who works with Maya\" and get the right person back, even when you've forgotten their name."
+								},
+								{
+									"icon": "filter",
+									"title": "Filter to what matters",
+									"description": "Narrow the graph by type, relationship, date range or how many hops out from someone, and spot the friends you haven't seen in a while."
+								},
+								{
+									"icon": "pin",
+									"title": "Knows where you are",
+									"description": "Turn on location and mefinx matches where you are to the places in your graph, so \"who do I know here?\" just works. Only your latest position is kept."
+								},
+								{
+									"icon": "calendar",
+									"title": "Works with Google",
+									"description": "Sign in with Google and mefinx can look up your contacts and calendar, read-only and only when it needs to."
+								},
+								{
+									"icon": "offline",
+									"title": "Installs like an app",
+									"description": "Add mefinx to your home screen on your phone or desktop. It opens instantly, your graph stays readable offline, and anything you type without a connection sends when you're back."
+								},
+								{
+									"icon": "undo",
+									"title": "Every change can be undone",
+									"description": "Every edit, including the assistant's, lands in a ledger, so a wrong change can be traced back and reversed."
+								},
+								{
+									"icon": "sparkle",
+									"title": "Pick your model",
+									"description": "Chat with the built-in model, or bring your own Claude or Gemini key and choose the model per message."
+								},
+								{
+									"icon": "lock",
+									"title": "Your data stays yours",
+									"description": "No ads, no tracking and nothing sold. Download everything as JSON, or delete your account and all of it, whenever you want."
+								}
+							]
+						},
+						{
+							"_type": "marketing_faq",
+							"_version": 1,
+							"_key": "faq",
+							"anchor_id": "faq",
+							"headline": "Questions",
+							"items": [
+								{
+									"question": "What is mefinx, exactly?",
+									"answer": "A notebook for remembering people. You chat with an assistant about who you met and what happened, and it keeps a structured graph of people, events and places that you can browse or ask questions of later."
+								},
+								{
+									"question": "Does it work on my phone?",
+									"answer": "Yes. mefinx is a web app you can install to your home screen on Android or desktop. Once installed it opens like any other app and your graph stays readable without a connection."
+								},
+								{
+									"question": "Which AI models does it use?",
+									"answer": "A Mistral model is available out of the box. You can also paste your own Anthropic or Google key in Settings to unlock Claude or Gemini, and pick the model for each message."
+								},
+								{
+									"question": "Where does my data go?",
+									"answer": "Your graph is stored on Cloudflare. When you ask a question, the question and the parts of your graph needed to answer it go to the model you picked. There is no advertising, no analytics and no third-party cookies. The privacy policy has the details."
+								},
+								{
+									"question": "Will it import my Google contacts?",
+									"answer": "It doesn't bulk-import. When you've linked Google, the assistant can look someone up in your contacts or calendar on demand, read-only, and add what's useful to your graph."
+								},
+								{
+									"question": "What shouldn't I put in it?",
+									"answer": "Anything worth stealing: passwords, account numbers, ID numbers, health details someone told you in confidence, or work secrets. mefinx is for remembering people, not a vault."
+								},
+								{
+									"question": "Can I get my data out?",
+									"answer": "Any time. Settings has a one-click export of your whole graph as JSON, and deleting your account erases everything you own."
+								}
+							]
+						},
+						{
+							"_type": "marketing_hero",
+							"_version": 1,
+							"_key": "cta",
+							"anchor_id": "start",
+							"centered": true,
+							"headline": "Start your graph",
+							"subheadline": "Sign in with Google and tell mefinx about the last person you met.",
+							"primary_cta_label": "Open mefinx",
+							"primary_cta_url": "https://mefinx.app"
+						}
+					]
+				}
+			}
+		]
+	}
+}
