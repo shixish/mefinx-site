@@ -36,16 +36,32 @@ Every call to action points at https://mefinx.app. Privacy and Terms link to the
 
 ## Deploying to mefinx.com
 
-Not done yet. The one-time steps:
+Every push to `main` deploys. `.github/workflows/deploy.yml` typechecks and builds on every push
+and pull request, and on `main` it runs `wrangler deploy`. Nothing is published from a developer
+machine.
 
-1. `pnpm wrangler login`, then `pnpm deploy`. The first deploy creates the `mefinx-site` D1
-   database and the `mefinx-site-media` R2 bucket named in `wrangler.jsonc`, and serves the site on
-   a `workers.dev` URL.
+CI authenticates with two repository secrets (Settings → Secrets and variables → Actions). This
+repo is public, so they must never be written into a file or printed in a workflow step.
+
+| Secret                  | Value                                                                              |
+| ----------------------- | ---------------------------------------------------------------------------------- |
+| `CLOUDFLARE_API_TOKEN`  | Account token with Edit on **Workers Scripts**, **D1**, **Workers R2 Storage** and **Workers KV Storage** |
+| `CLOUDFLARE_ACCOUNT_ID` | Cloudflare account ID                                                              |
+
+The Worker is about 4.2 MB gzipped, above the Workers free plan's 3 MB limit, so the account needs
+Workers Paid. R2 has to be enabled on the account once, in the dashboard.
+
+The one-time steps after the first green deploy:
+
+1. The first deploy creates the `mefinx-site` D1 database, the `mefinx-site-media` R2 bucket and a
+   KV namespace for sessions, and serves the site on a `workers.dev` URL.
 2. Set the encryption key EmDash uses for plugin settings:
    `pnpm wrangler secret put EMDASH_ENCRYPTION_KEY` (generate one with `npx emdash secrets`).
+   Worker secrets survive later deploys.
 3. Visit `/_emdash/admin` on the deployed URL and complete setup. That creates the admin account
-   (passkey) and applies the seed.
-4. Once it works on `workers.dev`, add the domain to `wrangler.jsonc` and deploy again:
+   (passkey) and applies the seed. Do this straight after the first deploy: until setup is done,
+   whoever reaches the admin first can claim it.
+4. Once it works on `workers.dev`, add the domain to `wrangler.jsonc` and push:
 
    ```jsonc
    "routes": [

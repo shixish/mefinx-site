@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    env:
+      # Lets the deploy step skip, instead of failing, until the secrets below are added.
+      HAS_CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
+    # Superseded pushes to a PR stop wasting a runner. Deploys from main queue instead of
+    # cancelling each other, so a half-finished deploy never gets cut off.
+    concurrency:
+      group: ci-${{ github.ref }}
+      cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Build
+        run: pnpm build
+
+      # This repo is public. Secrets reach only this step, only on a push to main (never on a pull
+      # request, where a fork could read them), and are passed as env vars that wrangler reads
+      # itself. Never echo them, and never add `set -x` here.
+      #
+      # The first deploy creates the D1 database, R2 bucket and KV namespace named in the built
+      # config (dist/server/wrangler.json) and looks them up by name after that.
+      - name: Deploy
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && env.HAS_CLOUDFLARE_TOKEN == 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: pnpm exec wrangler deploy
+
+      - name: Deploy skipped
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && env.HAS_CLOUDFLARE_TOKEN != 'true'
+        run: echo "::notice::Not deployed; CLOUDFLARE_API_TOKEN is not set in this repo's Actions secrets."
