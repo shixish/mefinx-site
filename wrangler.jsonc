@@ -10,6 +10,15 @@
 			"database_name": "mefinx-site",
 		},
 	],
+	// Astro's session store. wrangler created this namespace on an earlier deploy but can't find it
+	// again by name (it only reuses bindings from a Worker that deployed), so it is pinned by id.
+	// A namespace id is not a secret: it does nothing without an API token for the account.
+	"kv_namespaces": [
+		{
+			"binding": "SESSION",
+			"id": "5a3c93676a6c4fbda36732b2d14d3d74",
+		},
+	],
 	"r2_buckets": [
 		{
 			"binding": "MEDIA",
