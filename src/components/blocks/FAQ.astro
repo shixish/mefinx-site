@@ -10,19 +10,18 @@ const { anchor_id, headline, items } = value;
 ---
 
 <section class="faq section" id={anchor_id || undefined}>
-	<div class="container">
-		{headline && (
-			<header class="section-header">
-				<h2 class="section-headline">{headline}</h2>
-			</header>
-		)}
-		<div class="faq-list">
+	<div class="container faq-layout">
+		<header class="faq-header" data-reveal>
+			<span class="section-eyebrow">FAQ</span>
+			{headline && <h2 class="section-headline">{headline}</h2>}
+		</header>
+		<div class="faq-list" data-reveal style="--reveal-index: 1">
 			{items.map((item) => (
 				<details class="faq-item" name="faq">
 					<summary class="faq-question">
 						<span>{item.question}</span>
 						<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-							<path d="M6 9l6 6 6-6" />
+							<path d="M12 5v14M5 12h14" />
 						</svg>
 					</summary>
 					<div class="faq-answer">
@@ -35,28 +34,26 @@ const { anchor_id, headline, items } = value;
 </section>
 
 <style>
+	.faq-layout {
+		display: grid;
+		grid-template-columns: 0.7fr 1.3fr;
+		gap: var(--spacing-3xl);
+		align-items: start;
+	}
+
+	.faq-header {
+		position: sticky;
+		top: 100px;
+	}
+
 	.faq-list {
-		max-width: var(--max-width);
-		margin: 0 auto;
 		display: flex;
 		flex-direction: column;
-		gap: var(--spacing-md);
+		border-top: 1px solid var(--color-border);
 	}
 
 	.faq-item {
-		background: var(--color-surface);
-		border: 1px solid var(--color-border);
-		border-radius: var(--radius);
-		overflow: hidden;
-		transition: border-color var(--transition-fast);
-	}
-
-	.faq-item:hover {
-		border-color: var(--color-muted);
-	}
-
-	.faq-item[open] {
-		border-color: var(--color-brand-soft);
+		border-bottom: 1px solid var(--color-border);
 	}
 
 	.faq-question {
@@ -64,11 +61,17 @@ const { anchor_id, headline, items } = value;
 		align-items: center;
 		justify-content: space-between;
 		gap: var(--spacing-md);
-		padding: var(--spacing-lg);
-		font-size: var(--font-size-base);
+		padding: 1.25rem 0;
+		font-size: var(--font-size-lg);
 		font-weight: 600;
+		letter-spacing: -0.01em;
 		cursor: pointer;
 		list-style: none;
+		transition: color var(--transition-fast);
+	}
+
+	.faq-question:hover {
+		color: var(--color-brand-soft);
 	}
 
 	.faq-question::-webkit-details-marker {
@@ -80,20 +83,35 @@ const { anchor_id, headline, items } = value;
 		height: 20px;
 		flex-shrink: 0;
 		color: var(--color-muted);
-		transition: transform var(--transition-base);
+		transition: transform var(--transition-base), color var(--transition-base);
 	}
 
 	.faq-item[open] .faq-icon {
-		transform: rotate(180deg);
+		transform: rotate(45deg);
+		color: var(--color-accent);
 	}
 
 	.faq-answer {
-		padding: 0 var(--spacing-lg) var(--spacing-lg);
+		padding: 0 2.5rem 1.4rem 0;
 	}
 
 	.faq-answer p {
-		font-size: var(--font-size-sm);
 		color: var(--color-muted);
 		line-height: var(--leading-relaxed);
+	}
+
+	@media (max-width: 900px) {
+		.faq-layout {
+			grid-template-columns: 1fr;
+			gap: var(--spacing-xl);
+		}
+
+		.faq-header {
+			position: static;
+		}
+
+		.faq-question {
+			font-size: var(--font-size-base);
+		}
 	}
 </style>

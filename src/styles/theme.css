@@ -1,76 +1,138 @@
 /*
-  theme.css -- your theme overrides. This is the file to edit to
-  retheme the site.
+  theme.css -- the mefinx brand, layered over the template defaults in
+  tokens.css. Declarations here are unlayered, so they always win.
 
-  Every design token lives in src/styles/tokens.css (colors, gradients,
-  type scale, spacing, layout, shadows) with its default value. Override
-  any of them here: declarations in this file are unlayered, so they
-  always beat the @layer base defaults in tokens.css.
+  The site is dark-only, like the app. color-scheme is pinned to dark so
+  every light-dark() in tokens.css resolves to its dark value, and the
+  colours below are plain values rather than light-dark() pairs.
 
-  Colors are defined with light-dark(). Overriding with a plain color
-  changes light and dark mode at once; use light-dark(<light>, <dark>)
-  to set different values per mode.
-
-  Rebranding usually only needs --color-brand-* and --color-accent-* --
-  the gradient tokens follow automatically. For a flat, gradient-free
-  brand, set the --gradient-* tokens to solid colors.
-
-  Webfonts are loaded in astro.config.mjs (--font-body). Swap the loaded
-  font there; use overrides here for system fonts or a separate heading
-  face.
-
-  Example:
-
-  :root {
-    --color-brand: light-dark(#0d9488, #2dd4bf);
-    --color-accent: #f59e0b;
-    --font-weight-display: 700;
-  }
+  The three brand colours are the logo's strands (cyan, magenta, amber),
+  matching --color-brand-* in the app's styles.css. The entity colours are
+  the graph's: people blue, places amber, events green.
 */
 
 :root {
-}
+	color-scheme: dark;
 
-/*
-  mefinx brand. The three brand colours are the logo's strands (cyan,
-  magenta, amber), matching --color-brand-* in the app's styles.css. The
-  dark palette mirrors the app's near-black chrome (#0a0a0a).
-*/
-:root {
-	--color-bg: light-dark(#ffffff, #0a0a0a);
-	--color-text: light-dark(#0a0a0a, #f5f5f5);
-	--color-muted: light-dark(#525252, #a3a3a3);
-	--color-border: light-dark(#e5e5e5, #262626);
-	--color-surface: light-dark(#fafafa, #141414);
-	--color-brand: light-dark(#1b8fb8, #59bfe0);
-	--color-brand-strong: light-dark(#157599, #3fa9cc);
-	--color-brand-soft: light-dark(#59bfe0, #8fd4ea);
+	--color-bg: #07080a;
+	--color-surface: #0f1115;
+	--color-surface-raised: #161920;
+	--color-text: #f4f5f7;
+	--color-muted: #9aa1ad;
+	--color-faint: #6b7280;
+	--color-border: rgb(255 255 255 / 0.08);
+	--color-border-strong: rgb(255 255 255 / 0.16);
+
+	--color-brand: #59bfe0;
+	--color-brand-strong: #3fa9cc;
+	--color-brand-soft: #8fd4ea;
 	--color-accent: #df4c95;
 	--color-accent-soft: #eb86b8;
 	--color-amber: #fad34a;
+	--color-on-brand: #07080a;
 
-	/* Graph entity colours, as the app draws them. */
 	--color-person: #3b82f6;
 	--color-place: #f59e0b;
 	--color-event: #10b981;
 
-	--gradient-headline: linear-gradient(
+	--gradient-brand: linear-gradient(120deg, var(--color-brand), var(--color-accent));
+	--gradient-brand-strong: linear-gradient(120deg, var(--color-brand), var(--color-accent));
+	--gradient-spectrum: linear-gradient(
 		120deg,
-		var(--color-text) 30%,
-		var(--color-brand) 70%,
-		var(--color-accent)
+		var(--color-brand) 0%,
+		var(--color-accent) 55%,
+		var(--color-amber) 100%
 	);
+	--gradient-headline: linear-gradient(180deg, #ffffff 20%, #b8c0cc 100%);
+
+	--font-weight-display: 800;
+	--tracking-tight: -0.045em;
+	--tracking-snug: -0.03em;
+	--font-size-5xl: clamp(2.75rem, 1.6rem + 4.6vw, 5rem);
+	--font-size-3xl: clamp(2rem, 1.5rem + 2vw, 2.75rem);
+
+	--radius: 12px;
+	--radius-lg: 20px;
+
+	--shadow-lg: 0 20px 50px -20px rgb(0 0 0 / 0.8);
+	--shadow-xl: 0 40px 80px -30px rgb(0 0 0 / 0.9);
+	--shadow-glow: 0 0 0 1px rgb(89 191 224 / 0.25), 0 20px 60px -20px rgb(89 191 224 / 0.35);
 }
 
-@supports not (color: light-dark(#000, #fff)) {
-	:root {
-		--color-bg: #ffffff;
-		--color-text: #0a0a0a;
-		--color-muted: #525252;
-		--color-border: #e5e5e5;
-		--color-surface: #fafafa;
-		--color-brand: #1b8fb8;
-		--color-brand-strong: #157599;
-		--color-brand-soft: #59bfe0;
+body {
+	background:
+		radial-gradient(60rem 40rem at 15% -10%, rgb(89 191 224 / 0.12), transparent 60%),
+		radial-gradient(50rem 36rem at 90% 0%, rgb(223 76 149 / 0.1), transparent 60%),
+		var(--color-bg);
+	background-repeat: no-repeat;
+}
+
+::selection {
+	background: rgb(89 191 224 / 0.35);
+}
+
+:focus-visible {
+	outline: 2px solid var(--color-brand);
+	outline-offset: 3px;
+}
+
+/* Section headings share one treatment. */
+.section-headline {
+	letter-spacing: var(--tracking-snug);
+}
+
+.section-eyebrow {
+	display: inline-block;
+	margin-bottom: var(--spacing-md);
+	font-size: var(--font-size-xs);
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	background: var(--gradient-spectrum);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+.btn-primary {
+	color: var(--color-on-brand);
+	box-shadow: 0 10px 30px -10px rgb(223 76 149 / 0.6);
+}
+
+.btn-primary:hover {
+	box-shadow: 0 14px 40px -10px rgb(89 191 224 / 0.7);
+}
+
+.btn-secondary {
+	background: rgb(255 255 255 / 0.04);
+	border-color: var(--color-border-strong);
+	backdrop-filter: blur(8px);
+}
+
+.btn-secondary:hover {
+	background: rgb(255 255 255 / 0.08);
+	border-color: rgb(255 255 255 / 0.3);
+}
+
+/* Reveal-on-scroll, driven by the observer in Base.astro. Content stays visible without JS. */
+.js [data-reveal] {
+	opacity: 0;
+	transform: translateY(16px);
+	transition:
+		opacity 600ms ease,
+		transform 600ms cubic-bezier(0.2, 0.7, 0.2, 1);
+	transition-delay: calc(var(--reveal-index, 0) * 90ms);
+}
+
+.js [data-reveal].is-visible {
+	opacity: 1;
+	transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.js [data-reveal] {
+		opacity: 1;
+		transform: none;
+		transition: none;
 	}
 }

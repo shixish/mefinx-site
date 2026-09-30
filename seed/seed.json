@@ -30,6 +30,11 @@
 							}
 						},
 						{
+							"slug": "eyebrow",
+							"label": "Eyebrow",
+							"type": "string"
+						},
+						{
 							"slug": "headline",
 							"label": "Headline",
 							"type": "string",
@@ -408,7 +413,8 @@
 							"primary_cta_label": "Open mefinx",
 							"primary_cta_url": "https://mefinx.app",
 							"secondary_cta_label": "See how it works",
-							"secondary_cta_url": "#how"
+							"secondary_cta_url": "#how",
+							"eyebrow": "Installs on your phone · works offline"
 						},
 						{
 							"_type": "marketing_conversation",
@@ -497,7 +503,7 @@
 							"_version": 1,
 							"_key": "faq",
 							"anchor_id": "faq",
-							"headline": "Questions",
+							"headline": "Questions, answered",
 							"items": [
 								{
 									"question": "What is mefinx, exactly?",
@@ -538,7 +544,8 @@
 							"headline": "Start your graph",
 							"subheadline": "Sign in with Google and tell mefinx about the last person you met.",
 							"primary_cta_label": "Open mefinx",
-							"primary_cta_url": "https://mefinx.app"
+							"primary_cta_url": "https://mefinx.app",
+							"eyebrow": "Ready when you are"
 						}
 					]
 				}

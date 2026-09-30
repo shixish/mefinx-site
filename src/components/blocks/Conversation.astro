@@ -10,82 +10,173 @@ const { anchor_id, headline, subheadline, messages, caption } = value;
 ---
 
 <section class="conversation section" id={anchor_id || undefined}>
-	<div class="container">
-		<header class="section-header">
+	<div class="container conversation-layout">
+		<header class="conversation-copy" data-reveal>
+			<span class="section-eyebrow">How it works</span>
 			<h2 class="section-headline">{headline}</h2>
 			{subheadline && <p class="section-subheadline">{subheadline}</p>}
+			{caption && <p class="caption">{caption}</p>}
 		</header>
-		<div class="chat" role="list">
-			{messages.map((message) => (
-				<div
-					class:list={["bubble", message.speaker === "you" ? "bubble-you" : "bubble-mefinx"]}
-					role="listitem"
-				>
-					<span class="speaker">{message.speaker === "you" ? "You" : "mefinx"}</span>
-					<p>{message.text}</p>
-				</div>
-			))}
+
+		<div class="window" data-reveal style="--reveal-index: 1">
+			<div class="window-bar">
+				<span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+				<span class="window-title">
+					<img src="/logo.svg" alt="" width="16" height="16" />
+					mefinx
+				</span>
+			</div>
+			<ol class="chat">
+				{messages.map((message, index) => (
+					<li
+						class:list={["bubble", message.speaker === "you" ? "bubble-you" : "bubble-mefinx"]}
+						data-reveal
+						style={`--reveal-index: ${index + 1}`}
+					>
+						<span class="visually-hidden">{message.speaker === "you" ? "You:" : "mefinx:"}</span>
+						{message.text}
+					</li>
+				))}
+			</ol>
+			<div class="composer" aria-hidden="true">
+				<span>Tell mefinx about someone…</span>
+				<span class="send">↑</span>
+			</div>
 		</div>
-		{caption && <p class="caption">{caption}</p>}
 	</div>
 </section>
 
 <style>
-	.conversation {
-		background: var(--color-surface);
-		border-block: 1px solid var(--color-border);
+	.conversation-layout {
+		display: grid;
+		grid-template-columns: 0.9fr 1.1fr;
+		gap: var(--spacing-3xl);
+		align-items: center;
+	}
+
+	.conversation-copy .section-subheadline {
+		margin-top: var(--spacing-md);
+	}
+
+	.caption {
+		margin-top: var(--spacing-lg);
+		padding-left: var(--spacing-md);
+		border-left: 2px solid var(--color-accent);
+		font-size: var(--font-size-sm);
+		color: var(--color-muted);
+	}
+
+	.window {
+		border-radius: var(--radius-lg);
+		border: 1px solid var(--color-border-strong);
+		background: linear-gradient(180deg, var(--color-surface-raised), var(--color-surface));
+		box-shadow: var(--shadow-xl);
+		overflow: hidden;
+	}
+
+	.window-bar {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.7rem var(--spacing-md);
+		border-bottom: 1px solid var(--color-border);
+		background: rgb(255 255 255 / 0.02);
+	}
+
+	.window-dots {
+		position: absolute;
+		left: var(--spacing-md);
+		display: flex;
+		gap: 6px;
+	}
+
+	.window-dots i {
+		width: 10px;
+		height: 10px;
+		border-radius: 50%;
+		background: rgb(255 255 255 / 0.14);
+	}
+
+	.window-title {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		font-size: var(--font-size-sm);
+		font-weight: 600;
+		color: var(--color-muted);
 	}
 
 	.chat {
-		max-width: var(--max-width);
-		margin: 0 auto;
+		list-style: none;
 		display: flex;
 		flex-direction: column;
-		gap: var(--spacing-md);
+		gap: 0.75rem;
+		padding: var(--spacing-lg);
 	}
 
 	.bubble {
-		max-width: 80%;
-		padding: var(--spacing-md) var(--spacing-lg);
-		border-radius: var(--radius-lg);
-		line-height: var(--leading-normal);
-	}
-
-	.speaker {
-		display: block;
-		margin-bottom: var(--spacing-xs);
-		font-size: var(--font-size-xs);
-		font-weight: 600;
-		letter-spacing: 0.04em;
-		text-transform: uppercase;
-		opacity: 0.75;
+		max-width: 85%;
+		padding: 0.75rem 1rem;
+		border-radius: 18px;
+		font-size: 0.95rem;
+		line-height: 1.5;
 	}
 
 	.bubble-you {
 		align-self: flex-end;
-		color: var(--color-on-brand);
-		background: var(--gradient-brand-strong);
-		border-bottom-right-radius: var(--radius-sm);
+		color: #07080a;
+		font-weight: 500;
+		background: var(--gradient-brand);
+		border-bottom-right-radius: 6px;
 	}
 
 	.bubble-mefinx {
 		align-self: flex-start;
-		background: var(--color-bg);
+		color: var(--color-text);
+		background: rgb(255 255 255 / 0.05);
 		border: 1px solid var(--color-border);
-		border-bottom-left-radius: var(--radius-sm);
+		border-bottom-left-radius: 6px;
 	}
 
-	.bubble-mefinx .speaker {
-		color: var(--color-brand);
-		opacity: 1;
-	}
-
-	.caption {
-		max-width: var(--max-width);
-		margin: var(--spacing-2xl) auto 0;
-		text-align: center;
+	.composer {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin: 0 var(--spacing-lg) var(--spacing-lg);
+		padding: 0.6rem 0.6rem 0.6rem 1rem;
 		font-size: var(--font-size-sm);
-		color: var(--color-muted);
+		color: var(--color-faint);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-full);
+		background: rgb(0 0 0 / 0.25);
+	}
+
+	.send {
+		display: grid;
+		place-items: center;
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+		color: #07080a;
+		font-weight: 700;
+		background: var(--gradient-brand);
+	}
+
+	.visually-hidden {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		clip: rect(0 0 0 0);
+		white-space: nowrap;
+	}
+
+	@media (max-width: 900px) {
+		.conversation-layout {
+			grid-template-columns: 1fr;
+			gap: var(--spacing-2xl);
+		}
 	}
 
 	@media (max-width: 600px) {

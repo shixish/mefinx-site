@@ -55,6 +55,8 @@ don't add invented quotes or plans.
 - Feature icons are named in the seed's `icon` select and mapped to Phosphor icons in
   `src/components/blocks/Features.astro`. A new icon must also go in the `include` list in
   `astro.config.mjs`, or it won't ship.
+- The site is dark-only, like the app: there is no theme switch, and `theme.css` pins
+  `color-scheme: dark`. Sections fade in through `data-reveal` (observer in `Base.astro`).
 - Brand tokens live in `src/styles/theme.css` and mirror the app's `styles.css`: the logo's cyan,
   magenta and amber, and the graph's colours for people (blue), places (amber) and events (green).
   `public/logo.svg` and the icons are copied from the app repo's `public/`.

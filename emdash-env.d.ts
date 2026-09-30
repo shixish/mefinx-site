@@ -10,6 +10,7 @@ export interface PageContentMarketingHeroV1Block {
   _version: 1;
   _key: string;
   "anchor_id"?: string | null;
+  "eyebrow"?: string | null;
   "headline": string;
   "subheadline"?: string | null;
   "primary_cta_label"?: string | null;
