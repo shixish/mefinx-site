@@ -51,8 +51,16 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           set -o pipefail
-          pnpm exec wrangler deploy 2>&1 \
-            | sed -E 's/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/[email redacted]/g'
+          redact() { sed -E 's/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/[email redacted]/g'; }
+
+          # wrangler provisions D1 and KV on first deploy but not R2, so create the media bucket
+          # here if it doesn't exist yet. The name comes from the built config, not a copy of it.
+          bucket=$(node -p 'require("./dist/server/wrangler.json").r2_buckets[0].bucket_name')
+          if ! pnpm exec wrangler r2 bucket info "$bucket" > /dev/null 2>&1; then
+            pnpm exec wrangler r2 bucket create "$bucket" 2>&1 | redact
+          fi
+
+          pnpm exec wrangler deploy 2>&1 | redact
 
       - name: Deploy skipped
         if: github.event_name == 'push' && github.ref == 'refs/heads/main' && env.HAS_CLOUDFLARE_TOKEN != 'true'

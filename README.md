@@ -55,8 +55,8 @@ Workers Paid. R2 has to be enabled on the account once, in the dashboard.
 
 The one-time steps after the first green deploy:
 
-1. The first deploy creates the `mefinx-site` D1 database, the `mefinx-site-media` R2 bucket and a
-   KV namespace for sessions, and serves the site on a `workers.dev` URL.
+1. The first deploy creates the `mefinx-site` D1 database, a KV namespace for sessions and (in its
+   own workflow step, since wrangler doesn't provision R2) the `mefinx-site-media` R2 bucket, and serves the site on a `workers.dev` URL.
 2. Set the encryption key EmDash uses for plugin settings:
    `pnpm wrangler secret put EMDASH_ENCRYPTION_KEY` (generate one with `npx emdash secrets`).
    Worker secrets survive later deploys.
